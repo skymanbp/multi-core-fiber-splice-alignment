@@ -1,0 +1,35 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Runtime generated files
+index.csv
+
+# Numbered data files (copies created during analysis)
+[0-9]*_LX.txt
+[0-9]*_LY.txt
+[0-9]*_RX.txt
+[0-9]*_RY.txt
+
+# IDE settings
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
