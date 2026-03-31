@@ -33,3 +33,8 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Sensitive/proprietary files
+*.PNG
+*.png
+*.xlsx
