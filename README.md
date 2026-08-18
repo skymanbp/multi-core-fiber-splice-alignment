@@ -13,7 +13,7 @@ This project processes scan data from multi-core optical fibers to:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/multi-core-fiber-splice-alignment.git
+git clone https://github.com/skymanbp/multi-core-fiber-splice-alignment.git
 cd multi-core-fiber-splice-alignment
 ```
 
@@ -62,20 +62,21 @@ The analysis produces:
    - Detected markers overlaid on the images
    - Inner band boundaries
 
-3. **Generated files**:
-   - `index.csv` - Tracks analysis run count
+3. **Generated files** (written into `test-scan-data/`, gitignored):
+   - `index.csv` - A monotonically incremented run counter
    - `{index}_LX.txt`, `{index}_LY.txt`, etc. - Copies of input data for each run
 
 ## Algorithm
 
 The analysis pipeline includes:
 
-1. **Image preprocessing**: Gaussian smoothing and sharpening
-2. **Edge detection**: Sobel gradient-based fiber boundary detection
-3. **Image straightening**: Aligning the fiber center line
-4. **Inner band detection**: Locating the core region
-5. **Marker detection**: Finding bright/dark markers using amplitude analysis
-6. **Alignment calculation**: Computing rotational offset from marker positions
+1. **Parsing**: line 1 is the theta axis, lines 2-3 are metadata (skipped), lines 4+ form the intensity matrix
+2. **Boundary detection**: vertical Sobel gradient with per-column, prominence-gated peak picking, MAD outlier rejection, and smoothing
+3. **Image straightening**: per-column sub-pixel vertical shift that centres the boundary midline
+4. **Inner band detection**: per-column gradient argmax around the mid-row, with both edges flattened to their column mean
+5. **Marker detection**: two-stage — candidate ranking on the mid-band profile under a 180° bright/dark consistency check, then refinement to local extrema of the cumulative-intensity profile
+6. **Direction cross-check**: six detectors (Simple / Segmented / Radon / Gabor / Hough / Reference) compared in printed tables as a data-quality diagnostic
+7. **Alignment calculation**: (θ_L + θ_R) mod 360 per scan pairing, 0/360 wrap correction, ±20° outlier rejection, and the median of the surviving components
 
 ## License
 
