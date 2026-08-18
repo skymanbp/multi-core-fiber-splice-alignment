@@ -75,7 +75,7 @@ The analysis pipeline includes:
 3. **Image straightening**: per-column sub-pixel vertical shift that centres the boundary midline
 4. **Inner band detection**: per-column gradient argmax around the mid-row, with both edges flattened to their column mean
 5. **Marker detection**: two-stage — candidate ranking on the mid-band profile under a 180° bright/dark consistency check, then refinement to local extrema of the cumulative-intensity profile
-6. **Direction cross-check**: six detectors (Simple / Segmented / Radon / Gabor / Hough / Reference) compared in printed tables as a data-quality diagnostic
+6. **Direction cross-check**: five detectors (Simple / Segmented / Radon / Gabor / Hough) compared against a per-file reference in printed tables, as a data-quality diagnostic
 7. **Alignment calculation**: (θ_L + θ_R) mod 360 per scan pairing, 0/360 wrap correction, ±20° outlier rejection, and the median of the surviving components
 
 ## License
