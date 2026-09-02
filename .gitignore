@@ -38,3 +38,6 @@ Thumbs.db
 *.PNG
 *.png
 *.xlsx
+# cc-enforcer index / cc-memory state: machine-local, never content
+.ce/
+.ccm/
