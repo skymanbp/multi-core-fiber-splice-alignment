@@ -19,8 +19,10 @@ cd multi-core-fiber-splice-alignment
 
 2. Install dependencies:
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt jupyter
 ```
+
+`requirements.txt` lists the analysis libraries only (numpy, pandas, matplotlib, scipy, scikit-image); the notebook runner is not in it. The notebook also imports `tkinter`, so use a Tk-enabled Python build.
 
 ## Usage
 
@@ -31,7 +33,7 @@ pip install -r requirements.txt
 jupyter notebook MCF_scan.ipynb
 ```
 
-3. Execute all cells to perform the analysis
+3. Execute all cells to perform the analysis. The first cell does `os.chdir(DATA_DIR)` with a relative path, so restart the kernel before running the notebook again — a second run in the same kernel fails at that cell.
 
 ## Data Format
 
@@ -76,7 +78,7 @@ The analysis pipeline includes:
 4. **Inner band detection**: per-column gradient argmax around the mid-row, with both edges flattened to their column mean
 5. **Marker detection**: two-stage — candidate ranking on the mid-band profile under a 180° bright/dark consistency check, then refinement to local extrema of the cumulative-intensity profile
 6. **Direction cross-check**: five detectors (Simple / Segmented / Radon / Gabor / Hough) compared against a per-file reference in printed tables, as a data-quality diagnostic
-7. **Alignment calculation**: (θ_L + θ_R) mod 360 per scan pairing, 0/360 wrap correction, ±20° outlier rejection, and the median of the surviving components
+7. **Alignment calculation**: (θ_L + θ_R) mod 360 per scan pairing, 0/360 wrap correction, then ±20°-from-mean outlier screening at whole-direction granularity — the direction (X or Y) owning the worst outlier is dropped if the other direction is then clean, otherwise all available components are retained with a warning — and the median of the retained components
 
 ## License
 
