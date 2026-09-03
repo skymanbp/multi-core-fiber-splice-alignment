@@ -80,6 +80,10 @@ The analysis pipeline includes:
 6. **Direction cross-check**: five detectors (Simple / Segmented / Radon / Gabor / Hough) compared against a per-file reference in printed tables, as a data-quality diagnostic
 7. **Alignment calculation**: (θ_L + θ_R) mod 360 per scan pairing, 0/360 wrap correction, then ±20°-from-mean outlier screening at whole-direction granularity — the direction (X or Y) owning the worst outlier is dropped if the other direction is then clean, otherwise all available components are retained with a warning — and the median of the retained components
 
+## Legacy Notebook
+
+`legacy/MCF_scan_legacy.ipynb` is a frozen historical copy of an earlier version of the analysis, kept for reference. The pipeline described above runs entirely from `MCF_scan.ipynb`; nothing in the repository imports or executes the legacy notebook.
+
 ## License
 
 This project is provided as-is for research and educational purposes.
